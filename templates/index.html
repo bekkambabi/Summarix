@@ -1,34 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AI Content Summarizer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal AI Content Summarizer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-<h1>AI Content Summarizer</h1>
+<div class="container">
 
-<form method="POST">
+    <h1>Universal AI Content Summarizer</h1>
 
-    <textarea
-        name="text"
-        rows="12"
-        cols="80"
-        placeholder="Enter text here..."
-    ></textarea>
+    <p class="subtitle">
+        Summarize long text using AI-powered NLP
+    </p>
 
-    <br><br>
+    <form method="POST">
 
-    <button type="submit">
-        Generate Summary
-    </button>
+        <textarea
+            name="text"
+            placeholder="Paste your text here..."
+            required></textarea>
 
-</form>
+        <button type="submit">
+            Generate Summary
+        </button>
 
-<hr>
+    </form>
 
-<h2>Summary</h2>
+    {% if summary %}
+    <div class="summary-box">
 
-<p>{{ summary }}</p>
+        <h2>Generated Summary</h2>
+
+        <p>{{ summary }}</p>
+
+    </div>
+    {% endif %}
+
+</div>
 
 </body>
 </html>
