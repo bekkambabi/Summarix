@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Summarix</title>
+
+    <!-- Google Font -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="logo">
+
+        Summarix
+
+    </div>
+
+    <ul>
+
+        <li><a href="#">Home</a></li>
+
+        <li><a href="#features">Features</a></li>
+
+        <li><a href="#about">About</a></li>
+
+    </ul>
+
+</nav>
+
+<!-- Hero section comes next -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>Summarix</h1>
+
+        <h2>Read Less. Learn More.</h2>
+
+        <p>
+            Transform lengthy text, PDFs, websites, videos,
+            and audio into concise summaries in your preferred language.
+        </p>
+
+        <a href="/summarize" class="hero-btn">
+            Start Summarizing →
+        </a>
+
+    </div>
+
+    <div class="hero-image">
+
+        <img src="{{ url_for('static', filename='images/Ebook-pana.svg') }}"
+             alt="Summarix Illustration">
+
+    </div>
+
+</section>
+
+<section id="features" class="features">
+
+    <h2>Features</h2>
+
+    <p>
+        Summarix can summarize content from multiple sources,
+        making information easier to understand.
+    </p>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <i data-lucide="file-text"></i>
+            <h3>Text</h3>
+            <p>Paste articles, notes or any text.</p>
+        </div>
+
+        <div class="feature-card">
+            <i data-lucide="file"></i>
+            <h3>PDF</h3>
+            <p>Upload PDF documents for summarization.</p>
+        </div>
+
+        <div class="feature-card">
+            <i data-lucide="globe"></i>
+            <h3>Website</h3>
+            <p>Summarize articles directly from URLs.</p>
+        </div>
+
+        <div class="feature-card">
+            <i data-lucide="monitor-play"></i>
+            <h3>YouTube</h3>
+            <p>Generate summaries from video transcripts.</p>
+        </div>
+
+        <div class="feature-card">
+            <i data-lucide="mic"></i>
+            <h3>Audio</h3>
+            <p>Convert speech into summarized text.</p>
+        </div>
+
+        <div class="feature-card">
+            <i data-lucide="languages"></i>
+            <h3>Languages</h3>
+            <p>Read summaries in your preferred language.</p>
+        </div>
+
+    </div>
+
+</section>
+<script>
+    lucide.createIcons();
+</script>
+
+<section class="workflow">
+
+    <div class="section-title">
+        <h2>How It Works</h2>
+        <p>Generate concise summaries in three simple steps.</p>
+    </div>
+
+    <div class="timeline">
+
+        <div class="step">
+
+            <div class="circle">
+                <span>1</span>
+            </div>
+
+            <h3>Select Source</h3>
+
+            <p>
+                Choose text, PDF, website, YouTube,
+                or audio as your input.
+            </p>
+
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step">
+
+            <div class="circle">
+                <span>2</span>
+            </div>
+
+            <h3>Generate Summary</h3>
+
+            <p>
+                Process the content and extract
+                the key information.
+            </p>
+
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step">
+
+            <div class="circle">
+                <span>3</span>
+            </div>
+
+            <h3>Read & Export</h3>
+
+            <p>
+                View the summary, copy it,
+                or download it.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="why">
+
+    <h2>Why Choose Summarix?</h2>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+            <h3>⚡ Fast Processing</h3>
+            <p>Generate concise summaries within seconds.</p>
+        </div>
+
+        <div class="why-card">
+            <h3>🌍 Multiple Languages</h3>
+            <p>Read summaries in your preferred language.</p>
+        </div>
+
+        <div class="why-card">
+            <h3>📄 Multiple Input Types</h3>
+            <p>Supports text, PDFs, websites, YouTube and audio.</p>
+        </div>
+
+        <div class="why-card">
+            <h3>🔒 Privacy Focused</h3>
+            <p>Your uploaded content is only used for summarization.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="cta">
+
+    <h2>Ready to Save Time?</h2>
+
+    <p>
+        Start summarizing your content in just a few clicks.
+    </p>
+
+    <a href="/summarize" class="hero-btn">
+
+        Start Summarizing →
+
+    </a>
+
+</section>
+
+<footer>
+
+    <h2>Summarix</h2>
+
+    <p>
+        Transforming lengthy content into concise insights.
+    </p>
+
+    <small>
+
+        © 2026 Summarix
+
+    </small>
+
+</footer>
+
+</body>
+
+</html>

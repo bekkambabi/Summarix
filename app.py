@@ -8,11 +8,24 @@ summarizer = pipeline(
     model="facebook/bart-large-cnn"
 )
 
-@app.route("/", methods=["GET", "POST"])
+# -----------------------
+# Home Page
+# -----------------------
+@app.route("/")
 def home():
+    return render_template("home.html")
+
+
+# -----------------------
+# Summarizer Page
+# -----------------------
+@app.route("/summarize", methods=["GET", "POST"])
+def summarize():
+
     summary = ""
 
     if request.method == "POST":
+
         text = request.form["text"]
 
         result = summarizer(
@@ -25,9 +38,10 @@ def home():
         summary = result[0]["summary_text"]
 
     return render_template(
-        "index.html",
+        "summarize.html",
         summary=summary
     )
+
 
 if __name__ == "__main__":
     app.run(debug=True)
