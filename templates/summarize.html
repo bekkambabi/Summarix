@@ -2,9 +2,129 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarix</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
+
+<div class="container">
+
+    <h1>Summarix</h1>
+
+    <p class="subtitle">
+        Summarize your content quickly and efficiently.
+    </p>
+
+    <form method="POST">
+
+        <div class="card">
+
+            <h2>Choose Input Type</h2>
+
+            <div class="radio-group">
+
+                <label>
+                    <input type="radio" checked>
+                    Text
+                </label>
+
+                <label>
+                    <input type="radio" disabled>
+                    PDF (Coming Soon)
+                </label>
+
+                <label>
+                    <input type="radio" disabled>
+                    Website (Coming Soon)
+                </label>
+
+                <label>
+                    <input type="radio" disabled>
+                    YouTube (Coming Soon)
+                </label>
+
+                <label>
+                    <input type="radio" disabled>
+                    Audio (Coming Soon)
+                </label>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Paste Your Text</h2>
+
+            <textarea
+                name="text"
+                rows="12"
+                placeholder="Paste your text here..."
+                required></textarea>
+
+        </div>
+
+        <button type="submit">
+            Generate Summary
+        </button>
+
+    </form>
+
+    {% if summary %}
+
+    <div class="card">
+
+        <h2>Summary</h2>
+
+        <p>{{ summary }}</p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% if summary %}
+
+<div class="card">
+
+    <h2>Generated Summary</h2>
+
+    <p class="summary-text">
+        {{ summary }}
+    </p>
+
+</div>
+
+<div class="card">
+
+    <h2>Summary Statistics</h2>
+
+    <div class="stats">
+
+        <div class="stat-box">
+            <h3>{{ original_words }}</h3>
+            <p>Original Words</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>{{ summary_words }}</h3>
+            <p>Summary Words</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>{{ compression }}%</h3>
+            <p>Compression</p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
 
 </body>
 </html>

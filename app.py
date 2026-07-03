@@ -23,10 +23,15 @@ def home():
 def summarize():
 
     summary = ""
+    original_words = 0
+    summary_words = 0
+    compression = 0
 
     if request.method == "POST":
 
         text = request.form["text"]
+
+        original_words = len(text.split())
 
         result = summarizer(
             text,
@@ -37,11 +42,20 @@ def summarize():
 
         summary = result[0]["summary_text"]
 
+        summary_words = len(summary.split())
+
+        compression = round(
+            ((original_words - summary_words) / original_words) * 100,
+            1
+        )
+
     return render_template(
         "summarize.html",
-        summary=summary
+        summary=summary,
+        original_words=original_words,
+        summary_words=summary_words,
+        compression=compression
     )
-
 
 if __name__ == "__main__":
     app.run(debug=True)
