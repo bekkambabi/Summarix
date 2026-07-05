@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Summary Type | Summarix</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/choose.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Choose What to Summarize</h1>
+
+    <p class="subtitle">
+        Select the type of content you want to summarize.
+    </p>
+
+    <div class="card-container">
+
+        <a href="{{ url_for('summarize') }}" class="card">
+            <div class="icon">📝</div>
+            <h2>Text</h2>
+            <p>Summarize articles, notes and documents.</p>
+        </a>
+
+        <a href="{{ url_for('pdf') }}" class="card">
+            <div class="icon">📄</div>
+            <h2>PDF</h2>
+            <p>Upload PDF documents for summarization.</p>
+        </a>
+
+        <a href="{{ url_for('website') }}" class="card">
+            <div class="icon">🌐</div>
+            <h2>Website</h2>
+            <p>Summarize web pages instantly.</p>
+        </a>
+
+        <a href="{{ url_for('youtube') }}" class="card">
+            <div class="icon">🎥</div>
+            <h2>YouTube</h2>
+            <p>Generate summaries from video transcripts.</p>
+        </a>
+
+        <a href="{{ url_for('audio') }}" class="card">
+            <div class="icon">🎤</div>
+            <h2>Audio</h2>
+            <p>Convert speech into summarized text.</p>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

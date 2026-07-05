@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summarix</title>
+    <title>Summarix | Text Summarizer</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/dashboard.css') }}">
@@ -18,68 +18,175 @@
         Summarize your content quickly and efficiently.
     </p>
 
-    <form method="POST">
+    <form method="POST" id="summaryForm">
 
-        <div class="card">
-
-            <h2>Choose Input Type</h2>
-
-            <div class="radio-group">
-
-                <label>
-                    <input type="radio" checked>
-                    Text
-                </label>
-
-                <label>
-                    <input type="radio" disabled>
-                    PDF (Coming Soon)
-                </label>
-
-                <label>
-                    <input type="radio" disabled>
-                    Website (Coming Soon)
-                </label>
-
-                <label>
-                    <input type="radio" disabled>
-                    YouTube (Coming Soon)
-                </label>
-
-                <label>
-                    <input type="radio" disabled>
-                    Audio (Coming Soon)
-                </label>
-
-            </div>
-
-        </div>
+        <!-- ================= Text Input ================= -->
 
         <div class="card">
 
             <h2>Paste Your Text</h2>
 
             <textarea
+                id="textInput"
                 name="text"
                 rows="12"
-                placeholder="Paste your text here..."
-                required></textarea>
+                placeholder="Paste your article, notes, blog, research paper or any text here..."
+                required>{{ request.form.get('text','') }}</textarea>
+
+            <div class="counter">
+
+                <span id="wordCount">
+                    Words : 0
+                </span>
+
+                <span id="charCount">
+                    Characters : 0
+                </span>
+
+            </div>
 
         </div>
 
-        <button type="submit">
-            Generate Summary
-        </button>
+        <!-- Summary Length -->
+
+<div class="summary-length">
+
+    <h3>Select Summary Length</h3>
+
+    <div class="length-cards">
+
+        <label class="length-card">
+
+            <input type="radio"
+                   name="length"
+                   value="short"
+                   checked>
+
+            <span class="emoji">⚡</span>
+
+            <h4>Short</h4>
+
+            <p>Quick overview</p>
+
+        </label>
+
+        <label class="length-card">
+
+            <input type="radio"
+                   name="length"
+                   value="medium">
+
+            <span class="emoji">📄</span>
+
+            <h4>Medium</h4>
+
+            <p>Balanced summary</p>
+
+        </label>
+
+        <label class="length-card">
+
+            <input type="radio"
+                   name="length"
+                   value="long">
+
+            <span class="emoji">📚</span>
+
+            <h4>Detailed</h4>
+
+            <p>More detailed summary</p>
+
+        </label>
+
+    </div>
+
+</div>
+
+        <!-- ================= Buttons ================= -->
+
+        <div class="button-group">
+
+            <button type="submit" id="generateBtn">
+                ⚡ Generate Summary
+            </button>
+
+            <button type="button" id="clearBtn">
+                🗑 Clear
+            </button>
+
+        </div>
+
+        <!-- ================= Loading ================= -->
+
+        <div id="loading" class="loading">
+
+            <div class="spinner"></div>
+
+            <p>Generating summary...</p>
+
+        </div>
 
     </form>
 
     {% if summary %}
 
+    <!-- ================= Summary ================= -->
+
     <div class="card">
 
-        <h2>Summary</h2>
+        <h2>Generated Summary</h2>
 
-        <p>{{ summary }}</p>
+        <div id="summaryText" class="summary-text">
+            {{ summary }}
+        </div>
+
+        <div class="action-buttons">
+
+            <button type="button" id="copyBtn">
+                📋 Copy
+            </button>
+
+            <button type="button" id="downloadBtn">
+                📥 Download
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ================= Statistics ================= -->
+
+    <div class="card">
+
+        <h2>Summary Statistics</h2>
+
+        <div class="stats">
+
+            <div class="stat-box">
+
+                <h3>{{ original_words }}</h3>
+
+                <p>Original Words</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h3>{{ summary_words }}</h3>
+
+                <p>Summary Words</p>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h3>{{ compression }}%</h3>
+
+                <p>Compression</p>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -87,44 +194,7 @@
 
 </div>
 
-{% if summary %}
-
-<div class="card">
-
-    <h2>Generated Summary</h2>
-
-    <p class="summary-text">
-        {{ summary }}
-    </p>
-
-</div>
-
-<div class="card">
-
-    <h2>Summary Statistics</h2>
-
-    <div class="stats">
-
-        <div class="stat-box">
-            <h3>{{ original_words }}</h3>
-            <p>Original Words</p>
-        </div>
-
-        <div class="stat-box">
-            <h3>{{ summary_words }}</h3>
-            <p>Summary Words</p>
-        </div>
-
-        <div class="stat-box">
-            <h3>{{ compression }}%</h3>
-            <p>Compression</p>
-        </div>
-
-    </div>
-
-</div>
-
-{% endif %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
 </body>
 </html>
