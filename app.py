@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from transformers import pipeline
+from deep_translator import GoogleTranslator
 
 app = Flask(__name__)
 
@@ -8,6 +9,13 @@ summarizer = pipeline(
     model="facebook/bart-large-cnn"
 )
 
+# Temporary storage (we'll improve this later)
+latest_summary = ""
+original_words = 0
+summary_words = 0
+compression = 0
+
+
 # -----------------------
 # Home Page
 # -----------------------
@@ -15,20 +23,24 @@ summarizer = pipeline(
 def home():
     return render_template("home.html")
 
+
 @app.route("/choose")
 def choose():
     return render_template("choose.html")
 
+
 # -----------------------
-# Summarizer Page
+# Text Summarizer
 # -----------------------
 @app.route("/summarize", methods=["GET", "POST"])
 def summarize():
 
+    global latest_summary
+    global original_words
+    global summary_words
+    global compression
+
     summary = ""
-    original_words = 0
-    summary_words = 0
-    compression = 0
 
     if request.method == "POST":
 
@@ -59,6 +71,8 @@ def summarize():
 
         summary = result[0]["summary_text"]
 
+        latest_summary = summary
+
         summary_words = len(summary.split())
 
         compression = round(
@@ -75,7 +89,50 @@ def summarize():
     )
 
 
+# -----------------------
+# Translation
+# -----------------------
+@app.route("/translate", methods=["POST"])
+def translate():
 
+    global latest_summary
+    global original_words
+    global summary_words
+    global compression
+
+    language = request.form.get("language")
+
+    language_map = {
+        "English": "en",
+        "Telugu": "te",
+        "Hindi": "hi",
+        "Tamil": "ta",
+        "Kannada": "kn",
+        "Malayalam": "ml"
+    }
+
+    if language == "English":
+        translated_summary = latest_summary
+
+    else:
+
+        translated_summary = GoogleTranslator(
+            source="auto",
+            target=language_map[language]
+        ).translate(latest_summary)
+
+    return render_template(
+        "summarize.html",
+        summary=translated_summary,
+        original_words=original_words,
+        summary_words=len(translated_summary.split()),
+        compression=compression
+    )
+
+
+# -----------------------
+# Future Pages
+# -----------------------
 @app.route("/pdf")
 def pdf():
     return "<h1>PDF Summarizer Coming Soon</h1>"
@@ -94,6 +151,7 @@ def youtube():
 @app.route("/audio")
 def audio():
     return "<h1>Audio Summarizer Coming Soon</h1>"
+
 
 if __name__ == "__main__":
     app.run(debug=True)

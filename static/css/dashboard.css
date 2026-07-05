@@ -355,3 +355,62 @@ button:hover{
     }
 
 }
+.translation-section{
+
+    margin-top:35px;
+
+}
+
+.translation-section h2{
+
+    color:#2f60e8;
+
+    margin-bottom:20px;
+
+}
+
+.translation-controls{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.translation-controls select{
+
+    flex:1;
+
+    padding:14px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+    font-size:16px;
+
+}
+
+#translateBtn{
+
+    padding:14px 30px;
+
+    background:#2f60e8;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+#translateBtn:hover{
+
+    background:#1d4fd8;
+
+}

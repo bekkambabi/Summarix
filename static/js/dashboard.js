@@ -1,23 +1,27 @@
 const form = document.getElementById("summaryForm");
 const loading = document.getElementById("loading");
 
-if(form){
+// ================= Loading =================
 
-    form.addEventListener("submit",function(){
+if (form) {
 
-        loading.style.display="block";
+    form.addEventListener("submit", function () {
+
+        loading.style.display = "block";
 
     });
 
 }
 
-const copyBtn=document.getElementById("copyBtn");
+// ================= Copy =================
 
-if(copyBtn){
+const copyBtn = document.getElementById("copyBtn");
 
-    copyBtn.addEventListener("click",function(){
+if (copyBtn) {
 
-        const text=document.getElementById("summaryText").innerText;
+    copyBtn.addEventListener("click", function () {
+
+        const text = document.getElementById("summaryText").innerText;
 
         navigator.clipboard.writeText(text);
 
@@ -27,56 +31,68 @@ if(copyBtn){
 
 }
 
-const downloadBtn=document.getElementById("downloadBtn");
+// ================= Download =================
 
-if(downloadBtn){
+const downloadBtn = document.getElementById("downloadBtn");
 
-    downloadBtn.addEventListener("click",function(){
+if (downloadBtn) {
 
-        const text=document.getElementById("summaryText").innerText;
+    downloadBtn.addEventListener("click", function () {
 
-        const blob=new Blob([text],{type:"text/plain"});
+        const text = document.getElementById("summaryText").innerText;
 
-        const link=document.createElement("a");
+        const blob = new Blob([text], {
+            type: "text/plain"
+        });
 
-        link.href=URL.createObjectURL(blob);
+        const link = document.createElement("a");
 
-        link.download="summary.txt";
+        link.href = URL.createObjectURL(blob);
+
+        link.download = "summary.txt";
 
         link.click();
 
     });
 
-const textInput=document.getElementById("textInput");
+}
 
-const wordCount=document.getElementById("wordCount");
+// ================= Word Counter =================
 
-const charCount=document.getElementById("charCount");
+const textInput = document.getElementById("textInput");
 
-textInput.addEventListener("input",()=>{
+const wordCount = document.getElementById("wordCount");
 
-    const text=textInput.value.trim();
+const charCount = document.getElementById("charCount");
 
-    const words=text===""
-        ?0
-        :text.split(/\s+/).length;
+if (textInput) {
 
-    wordCount.innerHTML="Words : "+words;
+    textInput.addEventListener("input", () => {
 
-    charCount.innerHTML="Characters : "+text.length;
+        const text = textInput.value.trim();
 
-});
+        const words = text === ""
+            ? 0
+            : text.split(/\s+/).length;
 
-const clearBtn=document.getElementById("clearBtn");
+        wordCount.innerHTML = "Words : " + words;
 
-clearBtn.addEventListener("click",()=>{
+        charCount.innerHTML = "Characters : " + text.length;
 
-    textInput.value="";
+    });
 
-    wordCount.innerHTML="Words : 0";
+}
 
-    charCount.innerHTML="Characters : 0";
+// ================= Clear =================
 
-});
+const clearBtn = document.getElementById("clearSummaryBtn");
+
+if (clearBtn) {
+
+    clearBtn.addEventListener("click", () => {
+
+        window.location.href = "/summarize";
+
+    });
 
 }

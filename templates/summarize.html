@@ -18,9 +18,11 @@
         Summarize your content quickly and efficiently.
     </p>
 
+    <!-- ================= SUMMARY FORM ================= -->
+
     <form method="POST" id="summaryForm">
 
-        <!-- ================= Text Input ================= -->
+        <!-- Text Input -->
 
         <div class="card">
 
@@ -49,80 +51,81 @@
 
         <!-- Summary Length -->
 
-<div class="summary-length">
+        <div class="summary-length">
 
-    <h3>Select Summary Length</h3>
+            <h3>Select Summary Length</h3>
 
-    <div class="length-cards">
+            <div class="length-cards">
 
-        <label class="length-card">
+                <label class="length-card">
 
-            <input type="radio"
-                   name="length"
-                   value="short"
-                   checked>
+                    <input
+                        type="radio"
+                        name="length"
+                        value="short"
+                        checked>
 
-            <span class="emoji">⚡</span>
+                    <span class="emoji">⚡</span>
 
-            <h4>Short</h4>
+                    <h4>Short</h4>
 
-            <p>Quick overview</p>
+                    <p>Quick overview</p>
 
-        </label>
+                </label>
 
-        <label class="length-card">
+                <label class="length-card">
 
-            <input type="radio"
-                   name="length"
-                   value="medium">
+                    <input
+                        type="radio"
+                        name="length"
+                        value="medium">
 
-            <span class="emoji">📄</span>
+                    <span class="emoji">📄</span>
 
-            <h4>Medium</h4>
+                    <h4>Medium</h4>
 
-            <p>Balanced summary</p>
+                    <p>Balanced summary</p>
 
-        </label>
+                </label>
 
-        <label class="length-card">
+                <label class="length-card">
 
-            <input type="radio"
-                   name="length"
-                   value="long">
+                    <input
+                        type="radio"
+                        name="length"
+                        value="long">
 
-            <span class="emoji">📚</span>
+                    <span class="emoji">📚</span>
 
-            <h4>Detailed</h4>
+                    <h4>Detailed</h4>
 
-            <p>More detailed summary</p>
+                    <p>More detailed summary</p>
 
-        </label>
+                </label>
 
-    </div>
+            </div>
 
-</div>
+        </div>
 
-        <!-- ================= Buttons ================= -->
+        <!-- Buttons -->
 
         <div class="button-group">
 
             <button type="submit" id="generateBtn">
-                ⚡ Generate Summary
-            </button>
 
-            <button type="button" id="clearBtn">
-                🗑 Clear
+                ⚡ Generate Summary
+
             </button>
 
         </div>
 
-        <!-- ================= Loading ================= -->
+        <!-- Loading -->
 
         <div id="loading" class="loading">
 
             <div class="spinner"></div>
 
-            <p>Generating summary...</p>
+            <p>Generating Summary...</p>
 
         </div>
 
@@ -130,31 +133,84 @@
 
     {% if summary %}
 
-    <!-- ================= Summary ================= -->
+    <!-- ================= SUMMARY ================= -->
 
     <div class="card">
 
-        <h2>Generated Summary</h2>
+        <h2>Summary</h2>
 
         <div id="summaryText" class="summary-text">
+
             {{ summary }}
-        </div>
-
-        <div class="action-buttons">
-
-            <button type="button" id="copyBtn">
-                📋 Copy
-            </button>
-
-            <button type="button" id="downloadBtn">
-                📥 Download
-            </button>
 
         </div>
 
     </div>
 
-    <!-- ================= Statistics ================= -->
+    <hr class="section-divider">
+
+    <!-- ================= TRANSLATION FORM ================= -->
+
+    <form action="/translate" method="POST">
+
+        <div class="translation-section">
+
+            <h2>Translate Summary</h2>
+
+            <div class="translation-controls">
+
+                <select name="language">
+
+                    <option value="English">English</option>
+                    <option value="Telugu">Telugu</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="Kannada">Kannada</option>
+                    <option value="Malayalam">Malayalam</option>
+
+                </select>
+
+                <button type="submit" id="translateBtn">
+
+                    🌍 Translate
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <hr class="section-divider">
+
+    <!-- ================= ACTION BUTTONS ================= -->
+
+    <div class="action-buttons">
+
+        <button type="button" id="copyBtn">
+
+            📋 Copy
+
+        </button>
+
+        <button type="button" id="downloadBtn">
+
+            📥 Download
+
+        </button>
+
+        <button type="button" id="clearSummaryBtn">
+
+            🗑 Clear
+
+        </button>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- ================= STATISTICS ================= -->
 
     <div class="card">
 
