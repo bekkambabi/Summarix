@@ -414,3 +414,59 @@ button:hover{
     background:#1d4fd8;
 
 }
+
+/* ================= PDF Upload ================= */
+
+.upload-box{
+
+    display:block;
+
+    border:2px dashed #6C63FF;
+
+    border-radius:15px;
+
+    padding:50px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    text-align:center;
+
+    margin-top:20px;
+
+}
+
+.upload-box:hover{
+
+    background:#f5f6ff;
+
+}
+
+.upload-icon{
+
+    font-size:60px;
+
+    margin-bottom:15px;
+
+}
+
+.upload-note{
+
+    color:gray;
+
+    font-size:14px;
+
+}
+
+.file-name{
+
+    margin-top:20px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    color:#6C63FF;
+
+}

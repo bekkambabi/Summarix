@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from transformers import pipeline
 from deep_translator import GoogleTranslator
+import PyPDF2
 
 app = Flask(__name__)
 
@@ -133,9 +134,70 @@ def translate():
 # -----------------------
 # Future Pages
 # -----------------------
-@app.route("/pdf")
+@app.route("/pdf", methods=["GET", "POST"])
 def pdf():
-    return "<h1>PDF Summarizer Coming Soon</h1>"
+
+    summary = ""
+    original_words = 0
+    summary_words = 0
+    compression = 0
+
+    if request.method == "POST":
+
+        pdf_file = request.files["pdf"]
+
+        pdf_reader = PyPDF2.PdfReader(pdf_file)
+
+        text = ""
+
+        for page in pdf_reader.pages:
+
+            extracted = page.extract_text()
+
+            if extracted:
+                text += extracted + "\n"
+
+        if text.strip():
+
+            original_words = len(text.split())
+
+            length = request.form.get("length")
+
+            if length == "short":
+                max_len = 60
+                min_len = 20
+
+            elif length == "medium":
+                max_len = 120
+                min_len = 40
+
+            else:
+                max_len = 200
+                min_len = 80
+
+            result = summarizer(
+                text,
+                max_length=max_len,
+                min_length=min_len,
+                do_sample=False
+            )
+
+            summary = result[0]["summary_text"]
+
+            summary_words = len(summary.split())
+
+            compression = round(
+                ((original_words - summary_words) / original_words) * 100,
+                1
+            )
+
+    return render_template(
+        "pdf.html",
+        summary=summary,
+        original_words=original_words,
+        summary_words=summary_words,
+        compression=compression
+    )
 
 
 @app.route("/website")
